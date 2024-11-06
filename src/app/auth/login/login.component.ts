@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +11,10 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    // Aquí iría la lógica para autenticar al usuario
-    // Por ahora, solo redirigimos a una página de ejemplo
-    if (this.email === 'admin@example.com' && this.password === 'password') {
-      this.router.navigate(['/dashboard']);
-    } else {
+    if (!this.authService.login(this.email, this.password)) {
       alert('Credenciales incorrectas');
     }
   }
