@@ -17,8 +17,6 @@ export class RegisterComponent {
   constructor(private router: Router) {}
 
   onSubmit() {
-    // Aquí iría la lógica para registrar al usuario
-    // Por ahora, solo mostramos un mensaje de éxito
     alert('Usuario registrado con éxito');
     this.router.navigate(['/login']);
   }
