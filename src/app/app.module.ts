@@ -14,7 +14,7 @@ import { GuestDashboardComponent } from './home/guest-dashboard/guest-dashboard.
 import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { EditServiceComponent } from './admin/edit-service/edit-service.component';
 import { DeleteServiceComponent } from './admin/delete-service/delete-service.component';
-
+import { ReactiveFormsModule } from '@angular/forms'; 
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { DeleteServiceComponent } from './admin/delete-service/delete-service.co
     AddServiceComponent,
     EditServiceComponent,
     DeleteServiceComponent,
-
+    
   ],
   imports: [
     BrowserModule,
@@ -36,6 +36,7 @@ import { DeleteServiceComponent } from './admin/delete-service/delete-service.co
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,8 +10,8 @@ export class ServiceDBService {
 
   constructor(private http: HttpClient) {}
 
-  getServices(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  obtenerServicios(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
   addService(service: any): Observable<any> {

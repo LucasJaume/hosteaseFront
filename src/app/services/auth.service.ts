@@ -1,39 +1,58 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private role: string | null = null;
+  private apiUrl = 'http://localhost:8080/api/auth';
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): boolean {
-    // Simulación de autenticación
-    if (email === 'admin@example.com' && password === 'password') {
-      this.role = 'admin';
-      this.router.navigate(['/admin-dashboard']);
-      return true;
-    } else if (email === 'host@example.com' && password === 'password') {
-      this.role = 'host';
-      this.router.navigate(['/host-dashboard']);
-      return true;
-    } else if (email === 'guest@example.com' && password === 'password') {
-      this.role = 'guest';
-      this.router.navigate(['/guest-dashboard']);
-      return true;
-    } else {
-      return false;
-    }
+  login(email: string, password: string): Observable<any> {
+    const body = { email, password };
+
+    return this.http.post(`${this.apiUrl}/login`, body).pipe(
+      tap((response: any) => {
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('token', token);
+        }
+      })
+    );
+  }
+
+  register(user: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(`${this.apiUrl}/register`, user, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error occurred:', error);
+        throw error;
+      })
+    );
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   getRole(): string | null {
-    return this.role;
+    const token = this.getToken();
+    if (token) {
+      // Decodificar el token para extraer el rol
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.role || null;
+    }
+    return null;
   }
 
-  logout() {
-    this.role = null;
-    this.router.navigate(['/login']);
+  logout(): void {
+    localStorage.removeItem('token');
   }
+
 }

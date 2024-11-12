@@ -18,7 +18,7 @@ export class DeleteServiceComponent {
   }
 
   loadServices(): void {
-    this.serviceDB.getServices().subscribe(data => {
+    this.serviceDB.obtenerServicios().subscribe(data => {
       this.services = data;
     });
   }

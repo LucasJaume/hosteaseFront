@@ -7,20 +7,20 @@ import { ServiceDBService } from '../../services/service-db.service';
   styleUrls: ['./edit-service.component.css']
 })
 export class EditServiceComponent implements OnInit {
-  services: any[] = [];
+services: any[] = [];
   selectedService: any = null;
 
   constructor(private serviceDB: ServiceDBService) {}
 
   ngOnInit(): void {
-    this.loadServices();
+   this.loadServices();
   }
 
-  loadServices(): void {
-    this.serviceDB.getServices().subscribe(data => {
-      this.services = data;
-    });
-  }
+   loadServices(): void {
+     this.serviceDB.obtenerServicios().subscribe(data => {
+       this.services = data;
+     });
+   }
 
   selectService(service: any): void {
     this.selectedService = { ...service };

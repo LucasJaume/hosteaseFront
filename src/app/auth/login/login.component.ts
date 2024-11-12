@@ -14,9 +14,15 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    if (!this.authService.login(this.email, this.password)) {
-      alert('Credenciales incorrectas');
-    }
+    this.authService.login(this.email, this.password).subscribe({
+      next: () => {
+        console.log('Inicio de sesión exitoso');
+        this.router.navigate(['/admin-dashboard']); 
+      },
+      error: () => {
+        alert('Credenciales incorrectas');
+      }
+    });
   }
 
   goToRegister() {
