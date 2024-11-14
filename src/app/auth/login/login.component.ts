@@ -19,7 +19,9 @@ export class LoginComponent {
         console.log('Inicio de sesión exitoso');
         this.router.navigate(['/admin-dashboard']); 
       },
-      error: () => {
+      error: (err) => {
+        console.log('Inicio de sesión erroneo', err);
+        console.log("mis datos son: ",this.email, this.password)
         alert('Credenciales incorrectas');
       }
     });

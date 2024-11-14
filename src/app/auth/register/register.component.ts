@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -32,41 +31,24 @@ export class RegisterComponent {
     }
 
     const user = {
-      username: this.form.get('username')?.value,
-      nombre: this.form.get('nombre')?.value,
-      apellido: this.form.get('apellido')?.value,
-      fecha_nacimiento: this.form.get('fecha_nacimiento')?.value,
-      email: this.form.get('email')?.value,
-      password: this.form.get('password')?.value,
+      'username': this.form.get('username')?.value,
+      'nombre': this.form.get('nombre')?.value,
+      'apellido': this.form.get('apellido')?.value,
+      'fecha_nacimiento': this.form.get('fecha_nacimiento')?.value,
+      'email': this.form.get('email')?.value,
+      'password': this.form.get('password')?.value,
       //tipoUsuarioIds: +this.form.get('role')?.value
     };
-  //   this.authService.register(user).subscribe({
-  //     next: (prueba: Response) => {
-  //       this.router.navigate(['/login']);
-  //     },
-  //     error: (err: any) => {
-  //       console.log("Mis datos!!!!!", user);
-  //       console.error('Error en el registro:', err);
-  //       alert('Error en el registro');
-  //     }
-  // });
-  this.authService.register(user).subscribe({
-    next: (response: any) => {
-      alert('Usuario registrado con éxito');
-      this.router.navigate(['/login']);
-    },
-    error: (error: HttpErrorResponse) => {
-      console.error('Error en el registro:', error);
-      if (error.error instanceof ErrorEvent) {
-        console.error('Error del cliente:', error.error.message);
-      } else {
-        console.error(`Código de estado: ${error.status}, cuerpo del error:`, error.error);
+    this.authService.register(user).subscribe({
+      next: (prueba: Response) => {
+        this.router.navigate(['/login']);
+      },
+      error: (err: any) => {
+        console.log("Mis datos!!!!!", user);
+        console.error('Error en el registro:', err);
+        alert('Error en el registro');
       }
-      alert('Error en el registro');
-    }
   });
-  
-
   }
 
   goBack() {

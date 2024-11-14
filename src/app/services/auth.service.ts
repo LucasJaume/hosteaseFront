@@ -12,40 +12,19 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
-    const body = { email, password };
-
-    return this.http.post(`${this.apiUrl}/login`, body).pipe(
-      tap((response: any) => {
-        const token = response.token;
-        if (token) {
-          localStorage.setItem('token', token);
-        }
-      })
-    );
+    return this.http.post(`${this.apiUrl}/login`, {'username':email,'password': password});
   }
 
-  register(user: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post(`${this.apiUrl}/register`, user, { headers });
-  }
+register(user: any): Observable<any> {
+  
 
-
-
-// register(user: any): Observable<any> {
-//   const headers = new HttpHeaders({
-//     'Content-Type': 'application/json',
-//     'Access-Control-Allow-Origin': '*'
-//   });
-
-//   return this.http.post(`${this.apiUrl}/register`, user, { headers }).pipe(
-//     catchError((error) => {
-//       console.error('Error occurred:', error);
-//       throw error;
-//     })
-//   );
-// }
+  return this.http.post(`${this.apiUrl}/register`, user).pipe(
+    catchError((error) => {
+      console.error('Error occurred:', error);
+      throw error;
+    })
+  );
+}
 
   getToken(): string | null {
     return localStorage.getItem('token');
