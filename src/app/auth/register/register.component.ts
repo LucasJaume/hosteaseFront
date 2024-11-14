@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -19,11 +20,12 @@ export class RegisterComponent {
       fecha_nacimiento: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      role: ['1', Validators.required] // "1" para Inquilino y "2" para Anfitrión
+      //role: ['1', Validators.required] // "1" para Inquilino y "2" para Anfitrión
     });
   }
 
   onSubmit() {
+    
     if (this.form.invalid) {
       alert('Por favor complete todos los campos correctamente.');
       return;
@@ -36,20 +38,35 @@ export class RegisterComponent {
       fecha_nacimiento: this.form.get('fecha_nacimiento')?.value,
       email: this.form.get('email')?.value,
       password: this.form.get('password')?.value,
-      tipoUsuarioIds: +this.form.get('role')?.value
+      //tipoUsuarioIds: +this.form.get('role')?.value
     };
-
-    this.authService.register(user).subscribe(
-      response => {
-        alert('Usuario registrado con éxito');
-        this.router.navigate(['/login']);
-      },
-      error => {
-        console.log("Mis datos!!!!!", user)
-        console.error('Error en el registro:', error);
-        alert('Error en el registro');
+  //   this.authService.register(user).subscribe({
+  //     next: (prueba: Response) => {
+  //       this.router.navigate(['/login']);
+  //     },
+  //     error: (err: any) => {
+  //       console.log("Mis datos!!!!!", user);
+  //       console.error('Error en el registro:', err);
+  //       alert('Error en el registro');
+  //     }
+  // });
+  this.authService.register(user).subscribe({
+    next: (response: any) => {
+      alert('Usuario registrado con éxito');
+      this.router.navigate(['/login']);
+    },
+    error: (error: HttpErrorResponse) => {
+      console.error('Error en el registro:', error);
+      if (error.error instanceof ErrorEvent) {
+        console.error('Error del cliente:', error.error.message);
+      } else {
+        console.error(`Código de estado: ${error.status}, cuerpo del error:`, error.error);
       }
-    );
+      alert('Error en el registro');
+    }
+  });
+  
+
   }
 
   goBack() {

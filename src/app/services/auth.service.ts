@@ -28,14 +28,24 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-  
-    return this.http.post(`${this.apiUrl}/register`, user, { headers }).pipe(
-      catchError((error) => {
-        console.error('Error occurred:', error);
-        throw error;
-      })
-    );
+    return this.http.post(`${this.apiUrl}/register`, user, { headers });
   }
+
+
+
+// register(user: any): Observable<any> {
+//   const headers = new HttpHeaders({
+//     'Content-Type': 'application/json',
+//     'Access-Control-Allow-Origin': '*'
+//   });
+
+//   return this.http.post(`${this.apiUrl}/register`, user, { headers }).pipe(
+//     catchError((error) => {
+//       console.error('Error occurred:', error);
+//       throw error;
+//     })
+//   );
+// }
 
   getToken(): string | null {
     return localStorage.getItem('token');
@@ -44,7 +54,6 @@ export class AuthService {
   getRole(): string | null {
     const token = this.getToken();
     if (token) {
-      // Decodificar el token para extraer el rol
       const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.role || null;
     }
