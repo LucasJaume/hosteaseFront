@@ -15,7 +15,8 @@ export class LoginComponent {
 
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
-      next: () => {
+      next: (response) => {
+        localStorage.setItem('token',response.token);
         console.log('Inicio de sesión exitoso');
         this.router.navigate(['/admin-dashboard']); 
       },
