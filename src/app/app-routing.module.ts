@@ -13,12 +13,12 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: { expectedRole: 'admin' } },
-  { path: 'host-dashboard', component: HostDashboardComponent, canActivate: [AuthGuard], data: { expectedRole: 'host' } },
-  { path: 'guest-dashboard', component: GuestDashboardComponent, canActivate: [AuthGuard], data: { expectedRole: 'guest' } },
-  { path: 'add-service', component: AddServiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'admin' } },
-  { path: 'edit-service', component: EditServiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'admin' } },
-  { path: 'delete-service', component: DeleteServiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'admin' } },
+  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'host-dashboard', component: HostDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'guest-dashboard', component: GuestDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'add-service', component: AddServiceComponent, canActivate: [AuthGuard] },
+  { path: 'edit-service', component: EditServiceComponent, canActivate: [AuthGuard] },
+  { path: 'delete-service', component: DeleteServiceComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

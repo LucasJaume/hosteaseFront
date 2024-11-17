@@ -13,16 +13,25 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
+  login() {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
-        localStorage.setItem('token',response.token);
         console.log('Inicio de sesión exitoso');
-        this.router.navigate(['/admin-dashboard']); 
+        console.log('Mis datos son: ', response)
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('role', response.role);
+
+        const role = response.role;
+        if (role === 'ADMINISTRADOR') {
+          this.router.navigate(['/admin-dashboard']);
+        } else if (role === 'INQUILINO') {
+          this.router.navigate(['/host-dashboard']);
+        }
       },
       error: (err) => {
         console.log('Inicio de sesión erroneo', err);
-        console.log("mis datos son: ",this.email, this.password)
+        console.log("mis datos son: ", this.email, this.password);
         alert('Credenciales incorrectas');
       }
     });
