@@ -13,15 +13,23 @@ export class AddServiceComponent {
 
   constructor(private serviceDB: ServiceDBService, private router: Router) {}
 
-  onSubmit() {
-    const newService = {
-      name: this.serviceName,
-      category: this.serviceCategory
-    };
+  crearServicio() {
+    if (!this.serviceName) {
+      alert('Por favor, completa el nombre del servicio.');
+      return;
+    }
 
-    this.serviceDB.addService(newService).subscribe(() => {
-      alert('Servicio agregado con éxito');
-      this.router.navigate(['/admin-dashboard']);
+    this.serviceDB.crearServicio(this.serviceName).subscribe({
+      next: (response) => {
+        alert('Servicio agregado con éxito');
+        console.log('Datos enviados son: ', response);
+        console.log('Datos enviados son: ', this.serviceName);
+        this.router.navigate(['/admin-dashboard']);
+      },
+      error: (err) => {
+        console.error('Error al agregar el servicio:', err);
+        alert('Hubo un error al agregar el servicio. Por favor, intenta nuevamente.');
+      }
     });
   }
 }

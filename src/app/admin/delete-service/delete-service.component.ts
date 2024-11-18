@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceDBService } from '../../services/service-db.service';
 
@@ -7,7 +7,7 @@ import { ServiceDBService } from '../../services/service-db.service';
   templateUrl: './delete-service.component.html',
   styleUrls: ['./delete-service.component.css']
 })
-export class DeleteServiceComponent {
+export class DeleteServiceComponent implements OnInit {
   services: any[] = [];
   selectedServiceId: number | null = null;
 

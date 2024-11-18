@@ -1,22 +1,11 @@
 <div class="delete-service-container">
-    <h2>Eliminación de Servicio</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre del Servicio</th>
-          <th>Categoría</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let service of services">
-          <td>{{ service.name }}</td>
-          <td>{{ service.category }}</td>
-          <td>
-            <button (click)="selectService(service.id)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <h2>Eliminación de Servicio</h2>
+  <ul>
+    <li *ngFor="let service of services">
+      {{ service.nombre }}
+      <button (click)="selectService(service.id)">Eliminar</button>
+    </li>
+  </ul>
+  <button (click)="onSubmit()" [disabled]="selectedServiceId === null">Confirmar Eliminación</button>
   </div>
   

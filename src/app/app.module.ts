@@ -15,7 +15,13 @@ import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { EditServiceComponent } from './admin/edit-service/edit-service.component';
 import { DeleteServiceComponent } from './admin/delete-service/delete-service.component';
 import { ReactiveFormsModule } from '@angular/forms'; 
-
+import { MatIconModule } from '@angular/material/icon';
+import { AltaHospedajeComponent } from './alta-hospedaje/alta-hospedaje.component';
+import { ModifarHospedajeComponent } from './modifar-hospedaje/modifar-hospedaje.component';
+import { EliminarHospedajeComponent } from './eliminar-hospedaje/eliminar-hospedaje.component';
+import { ReservarHospedajeComponent } from './reservar-hospedaje/reservar-hospedaje.component';
+import { ModificarReservaComponent } from './modificar-reserva/modificar-reserva.component';
+import { CancelarReservaComponent } from './cancelar-reserva/cancelar-reserva.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +34,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddServiceComponent,
     EditServiceComponent,
     DeleteServiceComponent,
+    AltaHospedajeComponent,
+    ModifarHospedajeComponent,
+    EliminarHospedajeComponent,
+    ReservarHospedajeComponent,
+    ModificarReservaComponent,
+    CancelarReservaComponent,
     
   ],
   imports: [
@@ -36,7 +48,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

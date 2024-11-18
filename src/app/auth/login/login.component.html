@@ -2,7 +2,7 @@
     <h2>Login</h2>
     <form >
       <div class="form-group">
-        <label for="email">Email:</label>
+        <label for="email">Username:</label>
         <input type="email" id="email" [(ngModel)]="email" name="email" required>
       </div>
       <div class="form-group">
@@ -10,7 +10,7 @@
         <input type="password" id="password" [(ngModel)]="password" name="password" required>
       </div>
       <div class="button-group">
-        <button type="button" (click)="login()">Login</button>
+        <button type="button" (click)="login()">Iniciar sesion</button>
         <button type="button" (click)="goToRegister()">Registro</button>
       </div>
     </form>
