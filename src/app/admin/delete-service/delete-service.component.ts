@@ -19,12 +19,14 @@ export class DeleteServiceComponent implements OnInit {
 
   loadServices(): void {
     this.serviceDB.obtenerServicios().subscribe(data => {
+      console.log('Respuesta del get',data)
       this.services = data;
     });
   }
 
   selectService(id: number): void {
     this.selectedServiceId = id;
+    console.log('ID SELECCIONADO',this.selectedServiceId)
   }
 
   onSubmit(): void {

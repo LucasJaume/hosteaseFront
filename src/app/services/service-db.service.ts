@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,14 @@ export class ServiceDBService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    console.log('Este es mi token', token);
+  
     return this.http.get(`${this.apiUrl}/All`, { headers }).pipe(
       tap(response => {
-        console.log('response Del tap: ', response);
+        console.log('Respuesta del backend:', response);
+      }),
+      catchError(err => {
+        console.error('Error al obtener servicios:', err);
+        return throwError(() => new Error('Error al procesar la respuesta del backend'));
       })
     );
   }
@@ -43,16 +47,24 @@ export class ServiceDBService {
   }
 
   updateService(service: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${service.id}`, service);
-  }
-
-  deleteService(id: number): Observable<any> {
     const token = localStorage.getItem('token'); 
   
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+    console.log(service)
+    return this.http.put(`${this.apiUrl}/editar/${service.id}`, service,{ headers });
+  }
+
+  deleteService(id: number): Observable<any> {
+    const token = localStorage.getItem('token'); 
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    
+    return this.http.delete(`${this.apiUrl}/delete/${id}`, { headers });
   }
 }

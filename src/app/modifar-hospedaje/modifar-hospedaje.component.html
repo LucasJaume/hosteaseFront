@@ -1,1 +1,64 @@
-<p>modifar-hospedaje works!</p>
+<h1>Modificar Hospedajes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripción</th>
+      <th>Imagen</th>
+      <th>Precio por Noche</th>
+      <th>Ciudad</th>
+      <th>Tipo</th>
+      <th>Servicios</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hospedaje of hospedajes">
+      <td *ngIf="hospedajeEnEdicion?.id !== hospedaje.id">{{ hospedaje.descripcion }}</td>
+      <td *ngIf="hospedajeEnEdicion?.id === hospedaje.id">
+        <input [(ngModel)]="hospedajeEnEdicion.descripcion" />
+      </td>
+
+      <td>
+        <img [src]="hospedaje.imagen" alt="Imagen" width="100" *ngIf="hospedajeEnEdicion?.id !== hospedaje.id" />
+        <input [(ngModel)]="hospedajeEnEdicion.imagen" *ngIf="hospedajeEnEdicion?.id === hospedaje.id" />
+      </td>
+
+      <td *ngIf="hospedajeEnEdicion?.id !== hospedaje.id">{{ hospedaje.precio_por_noche}}</td>
+      <td *ngIf="hospedajeEnEdicion?.id === hospedaje.id">
+        <input [(ngModel)]="hospedajeEnEdicion.precioPorNoche" />
+      </td>
+
+      <td *ngIf="hospedajeEnEdicion?.id !== hospedaje.id">{{ hospedaje.ciudad.nombre }}</td>
+      <td *ngIf="hospedajeEnEdicion?.id === hospedaje.id">
+        <select [(ngModel)]="hospedajeEnEdicion.ciudadId">
+          <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+        </select>
+      </td>
+
+      <td *ngIf="hospedajeEnEdicion?.id !== hospedaje.id">{{ hospedaje.tipoHospedaje.nombre }}</td>
+      <td *ngIf="hospedajeEnEdicion?.id === hospedaje.id">
+        <select [(ngModel)]="hospedajeEnEdicion.tipoHospedajeId">
+          <option *ngFor="let tipo of tiposHospedaje" [value]="tipo.id">{{ tipo.nombre }}</option>
+        </select>
+      </td>
+
+      <td>
+        <div *ngIf="hospedajeEnEdicion?.id !== hospedaje.id">
+            <div *ngFor="let servicios of hospedaje.servicios">{{ servicios.nombre }}</div>
+        </div>
+        <div *ngIf="hospedajeEnEdicion?.id === hospedaje.id">
+            <select name="" id="hospedaje.servicio.id">
+                <option *ngFor="let servicio of servicios" [value]="servicio.id">{{ servicio.nombre }}</option>
+            </select>
+        </div>
+      </td>
+
+      <td>
+        <button *ngIf="hospedajeEnEdicion?.id !== hospedaje.id" (click)="iniciarEdicion(hospedaje)">Editar</button>
+        <button *ngIf="hospedajeEnEdicion?.id === hospedaje.id" (click)="guardarCambios()">Guardar</button>
+        <button *ngIf="hospedajeEnEdicion?.id === hospedaje.id" (click)="cancelarEdicion()">Cancelar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

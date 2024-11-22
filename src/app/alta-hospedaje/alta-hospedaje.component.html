@@ -1,1 +1,34 @@
-<p>alta-hospedaje works!</p>
+<h2>Alta de Hospedaje</h2>
+<form (ngSubmit)="crearHospedaje()">
+  <div>
+    <label for="descripcion">Descripción:</label>
+    <input id="descripcion" [(ngModel)]="descripcion" name="descripcion" required>
+  </div>
+  <div>
+    <label for="imagen">Imagen:</label>
+    <input id="imagen" [(ngModel)]="imagen" name="imagen" required>
+  </div>
+  <div>
+    <label for="precioPorNoche">Precio por Noche:</label>
+    <input id="precioPorNoche" [(ngModel)]="precioPorNoche" name="precioPorNoche" required>
+  </div>
+  <div>
+    <label for="ciudadId">Ciudad:</label>
+    <select id="ciudadId" [(ngModel)]="ciudadId" name="ciudadId" required>
+      <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="tipoHospedajeId">Tipo de Hospedaje:</label>
+    <select id="tipoHospedajeId" [(ngModel)]="tipoHospedajeId" name="tipoHospedajeId" required>
+      <option *ngFor="let tipo of tiposHospedaje" [value]="tipo.id">{{ tipo.nombre }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="serviciosIds">Servicios:</label>
+    <select id="serviciosIds" [(ngModel)]="serviciosIds" name="serviciosIds" multiple>
+      <option *ngFor="let servicio of servicios" [value]="servicio.id">{{ servicio.nombre }}</option>
+    </select>
+  </div>
+  <button type="submit">Agregar Hospedaje</button>
+</form>

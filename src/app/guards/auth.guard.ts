@@ -14,10 +14,10 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
     const role = this.authService.getRole();
     if (role) {
-      return true; // Permitir acceso si hay un rol
+      return true;
     } else {
       this.router.navigate(['/login']);
-      return false; // Redirigir al login si no hay rol
+      return false; 
     }
   }
 }

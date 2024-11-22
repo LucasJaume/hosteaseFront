@@ -22,9 +22,10 @@ services: any[] = [];
      });
    }
 
-  selectService(service: any): void {
-    this.selectedService = { ...service };
+   selectService(service: any): void {
+    this.selectedService = { id: service.id, nombre: service.nombre };
   }
+  
 
   onSubmit(): void {
     if (this.selectedService) {

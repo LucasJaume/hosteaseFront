@@ -1,1 +1,32 @@
-<p>cancelar-reserva works!</p>
+<div class="reservas-container">
+    <h2>Mis Reservas</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Importe total</th>
+          <th>Check-In</th>
+          <th>Check-Out</th>
+          <th>Cantidad adultos</th>
+          <th>Cantidad bebes</th>
+          <th>Cantidad mascotas</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reserva of reservas">
+          <td>{{ reserva.importe_total }}</td>
+          <td>{{ reserva.fecha_check_in}}</td>
+          <td>{{ reserva.fecha_check_out}}</td>
+          <td>{{ reserva.cant_adultos}}</td>
+          <td>{{ reserva.cant_bebes}}</td>
+          <td>{{ reserva.cant_mascotas}}</td>
+          <td>
+            <button (click)="cancelarReserva(reserva.pkReserva.idHospedaje, reserva.pkReserva.idUsuario)" class="btn btn-danger">
+              Cancelar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

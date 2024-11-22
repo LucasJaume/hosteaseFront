@@ -1,1 +1,50 @@
-<p>modificar-reserva works!</p>
+<div>
+    <h2>Reservas</h2>
+    <table>
+      <thead>
+        <tr>
+            <th>Importe total</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Cantidad adultos</th>
+            <th>Cantidad bebes</th>
+            <th>Cantidad mascotas</th>
+            <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reserva of reservas">
+            <td>{{ reserva.importe_total }}</td>
+            <td>{{ reserva.fecha_check_in}}</td>
+            <td>{{ reserva.fecha_check_out}}</td>
+            <td>{{ reserva.cant_adultos}}</td>
+            <td>{{ reserva.cant_bebes}}</td>
+            <td>{{ reserva.cant_mascotas}}</td>
+            <td>
+              <button (click)="seleccionarReserva(reserva)" class="btn btn-danger">
+                Editar
+              </button>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="reservaSeleccionada" class="form-container">
+      <h3>Editar Reserva</h3>
+      <form [formGroup]="editarForm" (ngSubmit)="guardarCambios()">
+        <label>Fecha Check-In:</label>
+        <input type="date" formControlName="fechaCheckIn" />
+        <label>Fecha Check-Out:</label>
+        <input type="date" formControlName="fechaCheckOut" />
+        <label>Adultos:</label>
+        <input type="number" formControlName="cantAdultos" />
+        <label>Niños:</label>
+        <input type="number" formControlName="cantNinos" />
+        <label>Mascotas:</label>
+        <input type="number" formControlName="cantMascotas" />
+        <button type="submit" (click)="guardarCambios()">Guardar Cambios</button>
+        <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  

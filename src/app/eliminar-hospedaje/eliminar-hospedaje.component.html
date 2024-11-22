@@ -1,1 +1,9 @@
-<p>eliminar-hospedaje works!</p>
+<div class="hospedajes-list">
+  <h2>Lista de Hospedajes</h2>
+  <ul>
+    <li *ngFor="let hospedaje of hospedajes">
+      <span>{{hospedaje.descripcion}} - ${{hospedaje.precio_por_noche}}</span>
+      <button (click)="eliminarHospedaje(hospedaje.id)">Eliminar</button>
+    </li>
+  </ul>
+</div>

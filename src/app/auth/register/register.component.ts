@@ -19,7 +19,7 @@ export class RegisterComponent {
       fecha_nacimiento: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      //role: ['1', Validators.required] // "1" para Inquilino y "2" para Anfitrión
+      
     });
   }
 
@@ -41,6 +41,7 @@ export class RegisterComponent {
     };
     this.authService.register(user).subscribe({
       next: (prueba: Response) => {
+        alert('Usuario registrado exitosamente!')
         this.router.navigate(['/login']);
       },
       error: (err: any) => {

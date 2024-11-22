@@ -21,6 +21,7 @@ export class LoginComponent {
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.username);
         localStorage.setItem('role', response.role);
+        localStorage.setItem('id', response.id);
 
         const role = response.role;
         if (role === 'ADMINISTRADOR') {
